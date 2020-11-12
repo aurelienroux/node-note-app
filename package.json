@@ -16,6 +16,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.1.4",
     "prettier": "^2.1.2",
-    "validator": "^13.1.17"
+    "validator": "^13.1.17",
+    "yargs": "^16.1.0"
   }
 }

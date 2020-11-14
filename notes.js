@@ -1,10 +1,6 @@
 const fs = require('fs')
 const chalk = require('chalk')
 
-const getNotes = () => {
-  return 'Your notes...'
-}
-
 const loadNotes = () => {
   try {
     const dataBuffer = fs.readFileSync('notes.json')
@@ -20,11 +16,17 @@ const saveNotes = (notes) => {
   fs.writeFileSync('notes.json', dataJSON)
 }
 
+const listNotes = () => {
+  const notes = loadNotes() // eslint-disable-line
+  console.log(chalk.blueBright.bold.underline('Your notes')) // eslint-disable-line
+  notes.forEach((note) => console.log(note.title)) // eslint-disable-line
+}
+
 const addNote = (title, body) => {
   const notes = loadNotes()
-  const duplicateNotes = notes.filter((note) => note.title === title)
+  const duplicateNote = notes.find((note) => note.title === title)
 
-  if (duplicateNotes.length === 0) {
+  if (!duplicateNote) {
     notes.push({ title, body })
     saveNotes(notes) // eslint-disable-line
     console.log(chalk.green.inverse('New note added')) // eslint-disable-line
@@ -45,4 +47,16 @@ const removeNote = (title) => {
   }
 }
 
-module.exports = { addNote, removeNote }
+const readNote = (title) => {
+  const notes = loadNotes()
+  const note = notes.find((selectedNote) => selectedNote.title === title)
+
+  if (note) {
+    console.log(chalk.blue.inverse(note.title)) // eslint-disable-line
+    console.log(note.body) // eslint-disable-line
+  } else {
+    console.log(chalk.red.inverse('No note was found')) // eslint-disable-line
+  }
+}
+
+module.exports = { listNotes, addNote, removeNote, readNote }

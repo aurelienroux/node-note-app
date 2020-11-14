@@ -46,7 +46,7 @@ yargs.command({
   command: 'list',
   describe: 'List all notes',
   handler() {
-    console.log('list all notes') // eslint-disable-line
+    notes.listNotes()
   }
 })
 
@@ -54,8 +54,15 @@ yargs.command({
 yargs.command({
   command: 'read',
   describe: 'Read a note',
-  handler() {
-    console.log('read a note') // eslint-disable-line
+  builder: {
+    title: {
+      describe: 'Note title to read',
+      demandOption: true,
+      type: 'string'
+    }
+  },
+  handler(argv) {
+    notes.readNote(argv.title)
   }
 })
 

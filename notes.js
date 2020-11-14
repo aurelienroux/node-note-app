@@ -1,6 +1,10 @@
 const fs = require('fs')
 const chalk = require('chalk')
 
+const getNotes = () => {
+  return 'Your notes...'
+}
+
 const loadNotes = () => {
   try {
     const dataBuffer = fs.readFileSync('notes.json')

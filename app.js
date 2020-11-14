@@ -20,7 +20,9 @@ yargs.command({
       type: 'string'
     }
   },
-  handler: (argv) => notes.addNote(argv.title, argv.body)
+  handler(argv) {
+    notes.addNote(argv.title, argv.body)
+  }
 })
 
 // Remove command
@@ -34,21 +36,27 @@ yargs.command({
       type: 'string'
     }
   },
-  handler: (argv) => notes.removeNote(argv.title)
+  handler(argv) {
+    notes.removeNote(argv.title)
+  }
 })
 
 // List command
 yargs.command({
   command: 'list',
   describe: 'List all notes',
-  handler: () => console.log('list all notes') // eslint-disable-line
+  handler() {
+    console.log('list all notes') // eslint-disable-line
+  }
 })
 
 // Read command
 yargs.command({
   command: 'read',
   describe: 'Read a note',
-  handler: () => console.log('read a note') // eslint-disable-line
+  handler() {
+    console.log('read a note') // eslint-disable-line
+  }
 })
 
 yargs.parse()
